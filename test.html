@@ -1,0 +1,44 @@
+<? include ("/Conexion/conexion.php") ?>
+
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title></title>
+    </head>
+
+    <body>
+        <?
+		$query = "SELECT RolId, RolDescription FROM Rol";
+		$res = sqlsrv_query($con, $query);
+		if (!$res) {
+			echo "No se puede mostrar los datos desde la consulta $query !!";
+			exit;
+		}
+		echo "<table id='tabla'>\n";
+		echo "
+			<tr>
+				<td>NO. Rol</td>
+				<td>Descripcion</td>
+				
+			</tr>
+
+			<tr>
+				<td><hr></td>
+				<td><hr></td>
+				
+			</tr>
+			\n";
+		while ($row=sqlsrv_query($res)) {
+			echo "
+				<tr>
+					<td>$row->RolId</td>
+					<td>$row->RolDescription</td>
+				</tr>\n
+			";
+		}
+		echo "</table>\n";
+	?>
+    </body>
+
+    </html>
